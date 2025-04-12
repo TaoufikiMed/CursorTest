@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - JDBC_DATABASE_URL=${AIVEN_DATABASE_URL}
+      - JDBC_DATABASE_USERNAME=${AIVEN_DATABASE_USERNAME}
+      - JDBC_DATABASE_PASSWORD=${AIVEN_DATABASE_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET}
+    networks:
+      - secure-api-network
+
+networks:
+  secure-api-network:
+    driver: bridge 
